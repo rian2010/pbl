@@ -2,7 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, router } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, ...props }) {
   const [titles, setTitles] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -14,7 +14,13 @@ export default function Dashboard({ auth }) {
       category,
     };
     router.post("/jobs", data);
+
+    setTitles("");
+    setDescription("");
+    setCategory("");
   };
+
+  console.log("props last: ", props);
 
   return (
     <AuthenticatedLayout
