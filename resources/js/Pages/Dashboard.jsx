@@ -93,13 +93,13 @@ export default function Dashboard({ auth, ...props }) {
             </button>
           </div>
         </div>
-        <div className="p-4">
-          {props.myJobs?.length > 0 ? (
+        <div className="flex justify-center flex-col lg:flex-row lg:flex-wrap lg:items-stretch items-center gap-5 p-5">
+          {props.myJobs && props.myJobs.length > 0 ? (
             props.myJobs.map((jobs, i) => {
               return (
                 <div
                   key={i}
-                  className="card w-full lg:w-96 bg-base-100 shadow-xl"
+                  className="card w-full lg:w-96 bg-base-100 shadow-xl m-2"
                 >
                   <div className="card-body">
                     <h2 className="card-title">

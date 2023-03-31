@@ -15,7 +15,7 @@ class JobsController extends Controller
      */
     public function index()
     {
-        $jobs = new JobsCollection(jobs::paginate(8));
+        $jobs = new JobsCollection(jobs::OrderByDesc('id')->paginate(8));
         return Inertia::render('Homepage', [
             'title' => 'JobFinder',
             'description' => 'Find the job vacancy that you dream of',
