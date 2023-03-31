@@ -19,6 +19,7 @@ use Inertia\Inertia;
 
 Route::get('/', [JobsController::class, 'index']);
 Route::post('/jobs', [JobsController::class, 'store']);
+Route::get('/jobs', [JobsController::class, 'show']);
 
 
 Route::get('/dashboard', function () {

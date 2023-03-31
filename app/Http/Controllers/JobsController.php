@@ -50,7 +50,10 @@ class JobsController extends Controller
      */
     public function show(Jobs $jobs)
     {
-        //
+        $myJobs = $jobs::where('author', auth()->user()->email)->get();
+        return Inertia::render('Dashboard', [
+            'myJobs' => $myJobs
+        ]);
     }
 
     /**
