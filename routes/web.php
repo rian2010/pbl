@@ -5,6 +5,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +23,18 @@ use Inertia\Inertia;
 Route::get('/', [JobsController::class, 'index']);
 Route::post('/jobs', [JobsController::class, 'store']);
 Route::get('/jobs', [JobsController::class, 'show']);
+
+Route::get('/images/{filename}', function ($filename) {
+    $path = resource_path('images/' . $filename);
+    if (!File::exists($path)) {
+        abort(404);
+    }
+    $file = File::get($path);
+    $type = File::mimeType($path);
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+    return $response;
+})->where('filename', '^[^/]+$');
 
 
 Route::get('/dashboard', function () {

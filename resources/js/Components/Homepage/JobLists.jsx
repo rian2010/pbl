@@ -1,13 +1,13 @@
+import company from "../../../images/company.png";
+
 const isJobs = (jobs) => {
+  // const imageUrl = "/images/company.png";
+
   return jobs.map((data, i) => {
     return (
       <div key={i} className="card w-full lg:w-96 bg-base-100 shadow-xl">
         <figure>
-          <img
-            className="rounded-lg p-4"
-            src="https://placeimg.com/400/225/arch"
-            alt="Shoes"
-          />
+          <img className="rounded-lg p-4" src={company} alt="Shoes" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">

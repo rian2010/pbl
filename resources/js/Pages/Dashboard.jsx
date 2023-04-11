@@ -6,6 +6,7 @@ export default function Dashboard({ auth, ...props }) {
   const [titles, setTitles] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+  const [image, setImage] = useState("");
   const [isNotif, setIsNotif] = useState(false);
 
   const handleSubmit = () => {
@@ -13,6 +14,7 @@ export default function Dashboard({ auth, ...props }) {
       titles,
       description,
       category,
+      image,
     };
     router.post("/jobs", data);
     setIsNotif(true);
@@ -65,14 +67,14 @@ export default function Dashboard({ auth, ...props }) {
             <input
               type="text"
               placeholder="Judul"
-              className="m-3 input input-bordered w-full "
+              className="m-3 input input-bordered w-full"
               onChange={(titles) => setTitles(titles.target.value)}
               value={titles}
             />
             <input
               type="text"
               placeholder="Deskripsi"
-              className="m-3 input input-bordered w-full "
+              className="m-3 input input-bordered w-full"
               onChange={(description) =>
                 setDescription(description.target.value)
               }
@@ -81,9 +83,14 @@ export default function Dashboard({ auth, ...props }) {
             <input
               type="text"
               placeholder="Kategori"
-              className="m-3 input input-bordered w-full "
+              className="m-3 input input-bordered w-full"
               onChange={(category) => setCategory(category.target.value)}
               value={category}
+            />
+            <input
+              type="file"
+              className="file-input w-full max-w-xs m-3"
+              onChange={(image) => setImage(image.target.value)}
             />
             <button
               className="btn btn-primary m-3"
