@@ -21,8 +21,11 @@ use Illuminate\Support\Facades\Response;
 */
 
 Route::get('/', [JobsController::class, 'index']);
-Route::post('/jobs', [JobsController::class, 'store']);
-Route::get('/jobs', [JobsController::class, 'show']);
+Route::post('/jobs', [JobsController::class, 'store'])->middleware(['auth', 'verified'])->name('create.jobs');
+Route::get('/jobs', [JobsController::class, 'show'])->middleware(['auth', 'verified'])->name('my.jobs');
+Route::get('/jobs/edit', [JobsController::class, 'edit'])->middleware(['auth', 'verified'])->name('edit.jobs');
+Route::post('/jobs/update', [JobsController::class, 'update'])->middleware(['auth', 'verified'])->name('update.jobs');
+Route::post('/jobs/delete', [JobsController::class, 'destroy'])->middleware(['auth', 'verified'])->name('delete.jobs');
 
 Route::get('/images/{filename}', function ($filename) {
     $path = resource_path('images/' . $filename);

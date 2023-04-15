@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, router } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import { useState, useEffect } from "react";
 
 export default function Dashboard({ auth, ...props }) {
@@ -116,6 +116,26 @@ export default function Dashboard({ auth, ...props }) {
                     <p>{jobs.description}</p>
                     <div className="card-actions justify-end">
                       <div className="badge badge-inline">{jobs.category}</div>
+                      <div className="badge badge-outline">
+                        <Link
+                          href={route("edit.jobs")}
+                          method="get"
+                          data={{ id: jobs.id }}
+                          as="button"
+                        >
+                          Edit
+                        </Link>
+                      </div>
+                      <div className="badge badge-outline">
+                        <Link
+                          href={route("delete.jobs")}
+                          method="post"
+                          data={{ id: jobs.id }}
+                          as="button"
+                        >
+                          Delete
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\JobsCollection;
 use App\Models\Jobs;
+use Illuminate\Contracts\Queue\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -59,24 +60,33 @@ class JobsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Jobs $jobs)
+    public function edit(Jobs $jobs, Request $request)
     {
-        //
+        return Inertia::render('EditJobs', [
+            'myJobs' => $jobs->find($request->id)
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Jobs $jobs)
+    public function update(Request $request)
     {
-        //
+        Jobs::where('id', $request->id)->update([
+            'titles' => $request->titles,
+            'description' => $request->description,
+            'category' => $request->category,
+        ]);
+        return redirect()->route('dashboard');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Jobs $jobs)
+    public function destroy(Request $request, Jobs $jobs)
     {
-        //
+        $jobs = Jobs::find($request->id);
+        $jobs->delete();
+        return redirect()->back()->with('message', 'Lowongan Berhasil Dibuat');
     }
 }
